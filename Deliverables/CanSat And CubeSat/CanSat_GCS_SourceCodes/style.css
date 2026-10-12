@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: #0b0f19;
+    color: #e2e8f0;
+    padding: 15px;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Responsive Dashboard Layout Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto minmax(300px, auto);
+    gap: 15px;
+    height: 100%;
+}
+
+.panel {
+    background-color: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar {
+    grid-column: span 4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #3b82f6;
+}
+
+.telemetry-panel { grid-column: span 2; }
+.command-panel { grid-column: span 1; }
+.error-panel { grid-column: span 1; }
+.graph-panel { grid-column: span 2; }
+.map-panel { grid-column: span 2; }
+
+h2, h3, h4 {
+    color: #94a3b8;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Button Configurations */
+.btn {
+    background-color: #374151;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.btn:hover:not(:disabled) { background-color: #4b5563; }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-green { background-color: #059669; }
+.btn-red { background-color: #dc2626; }
+.btn-orange { background-color: #ea580c; }
+.btn-warning { background-color: #d97706; color: #000; }
+.btn-danger { background-color: #b91c1c; }
+
+/* Status Indicators */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+.disconnected { background-color: #7f1d1d; color: #fecaca; }
+.connected { background-color: #064e3b; color: #a7f3d0; }
+
+/* Telemetry Layout */
+.telemetry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.telemetry-card {
+    background: #1f2937;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    border-bottom: 3px solid #3b82f6;
+}
+.telemetry-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-top: 5px;
+}
+
+/* Error Code Styling */
+.error-code-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.err-digit {
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+.normal { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+.fault { color: #ef4444; background: rgba(239, 68, 68, 0.1); animation: blink 1s infinite; }
+
+.error-list { list-style: none; font-size: 0.85rem; }
+.error-list li { margin: 4px 0; color: #6b7280; }
+.error-list li.active-fault { color: #ef4444; font-weight: bold; }
+
+/* Map Element */
+#map {
+    height: 250px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+/* Added Attitude and Orientation Layout Styles below */
+.orientation-panel {
+    grid-column: span 2;
+}
+
+#horizonCanvas {
+    background-color: #000;
+    border: 2px solid #374151;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}

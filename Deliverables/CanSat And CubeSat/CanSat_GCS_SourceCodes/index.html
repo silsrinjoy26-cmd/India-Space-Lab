@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanSat Ground Control Station</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-grid">
+        
+        <header class="panel top-bar">
+            <div class="logo-section">
+                <h2>CANSAT MISSION CONTROL</h2>
+                <span id="connection-status" class="status-badge disconnected">DISCONNECTED</span>
+            </div>
+            <div class="control-buttons">
+                <button id="btn-start" class="btn btn-green">START STREAM</button>
+                <button id="btn-stop" class="btn btn-red" disabled>STOP STREAM</button>
+                <button id="btn-sync" class="btn">SYNC PC TIME</button>
+                <button id="btn-reset" class="btn btn-orange">RESET PACKET</button>
+                <button id="btn-export-csv" class="btn btn-green">EXPORT CSV</button>
+                <button id="btn-export-graph" class="btn btn-orange">EXPORT GRAPH IMAGE</button>
+            </div>
+        </header>
+
+        <section class="panel telemetry-panel">
+            <h3>📊 TELEMETRY DATA</h3>
+            <div class="telemetry-grid">
+                <div class="telemetry-card"><h4>PACKET COUNT</h4><p id="tel-packet">0</p></div>
+                <div class="telemetry-card"><h4>ALTITUDE</h4><p><span id="tel-alt">0.0</span> m</p></div>
+                <div class="telemetry-card"><h4>PRESSURE</h4><p><span id="tel-pres">0.0</span> Pa</p></div>
+                <div class="telemetry-card"><h4>TEMPERATURE</h4><p><span id="tel-temp">0.0</span> °C</p></div>
+                <div class="telemetry-card"><h4>DESCENT RATE</h4><p><span id="tel-descent">0.0</span> m/s</p></div>
+                <div class="telemetry-card"><h4>BATTERY VOLTAGE</h4><p><span id="tel-batt">0.0</span> V</p></div>
+                <div class="telemetry-card"><h4>ROLL</h4><p><span id="tel-roll">0.0</span>°</p></div>
+                <div class="telemetry-card"><h4>PITCH</h4><p><span id="tel-pitch">0.0</span>°</p></div>
+                <div class="telemetry-card"><h4>YAW</h4><p><span id="tel-yaw">0.0</span>°</p></div>
+            </div>
+        </section>
+
+        <section class="panel command-panel">
+            <h3>⚠️ MISSION CONTROL</h3>
+            <div class="command-buttons">
+                <button id="cmd-separation" class="btn btn-warning">MANUAL SEPARATION</button>
+                <button id="cmd-parachute" class="btn btn-danger">DEPLOY PARACHUTE</button>
+                <button id="cmd-redundant" class="btn">REDUNDANT ACTIVATION</button>
+            </div>
+            <div class="command-status">
+                <h4>CMD STATUS:</h4>
+                <p id="cmd-log">Awaiting launch configurations...</p>
+            </div>
+        </section>
+
+        <section class="panel error-panel">
+            <h3>🚨 FAULT MONITORING SYSTEM</h3>
+            <div class="error-code-display">
+                <span id="err-digit-1" class="err-digit normal">0</span>
+                <span id="err-digit-2" class="err-digit normal">0</span>
+                <span id="err-digit-3" class="err-digit normal">0</span>
+                <span id="err-digit-4" class="err-digit normal">0</span>
+            </div>
+            <ul class="error-list">
+                <li id="err-lbl-1">Descent Rate Fault</li>
+                <li id="err-lbl-2">GPS Down Fault</li>
+                <li id="err-lbl-3">Payload Separation Fault</li>
+                <li id="err-lbl-4">Emergency Parachute Active</li>
+            </ul>
+        </section>
+
+        <section class="panel graph-panel">
+            <h3>📈 REAL-TIME VISUALIZATION</h3>
+            <div class="canvas-container">
+                <canvas id="telemetryChart"></canvas>
+            </div>
+        </section>
+
+        <section class="panel map-panel">
+            <h3>🗺️ LIVE GPS TRAJECTORY TRACKING</h3>
+            <div id="map"></div>
+        </section>
+
+        <section class="panel orientation-panel">
+            <h3>✈️ ATTITUDE & ORIENTATION</h3>
+            <div class="canvas-container" style="display: flex; justify-content: center; align-items: center; height: 250px;">
+                <canvas id="horizonCanvas" width="220" height="220"></canvas>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
